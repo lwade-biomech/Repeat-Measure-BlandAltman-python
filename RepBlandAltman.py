@@ -21,12 +21,14 @@ OUTPUT:
 Running this script directly will use example data (difference between two methods) provided alongside this code.
 This will also occur if the main() function is run without an input (e.g. data, obsv, bias, SD, LOA_L, LOA_U, commonSense = main()). 
 This example data is the same as the data provided in our published manuscript, so users can follow along with 
-the steps outlined in the appendix. Example data is the observed difference between a
-a marker-based motion capture system, and a markerless motion capture system, for the left
-ankle joint in the sagittal plane during one stride of walking.
+the steps outlined in the appendix. Example data is the observed difference between a marker-based motion capture system, 
+and a markerless motion capture system, for the left ankle joint in the sagittal plane during one stride of walking, 
+with up to 10 stride performed per person and each stride normalised to 101 points. Thus the total number of observations 
+for each participant may differ (strides x 101 data points).
 
 If using this code, please cite: WADE, L., NEEDHAM, L., EVANS, M., MCGUIGAN, P., COLYER, S., COSKER, D. & BILZON, J. 2023. Examination of 2D frontal and sagittal markerless motion capture: Implications for markerless applications. PLOS ONE, 18, e0293917.)
-Please report any issues with this code using github or emailing lw2175@bath.ac.uk
+
+    Please report any issues with this code using github or emailing lw2175@bath.ac.uk
     """
 
 
@@ -34,6 +36,7 @@ import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
+
 
 
 def observations(data): # Identify how many ovservation were obtained for each participant
