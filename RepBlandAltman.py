@@ -41,7 +41,7 @@ from statsmodels.formula.api import ols
 
 def observations(data): # Identify how many ovservation were obtained for each participant
     participants = pd.unique(data['participants'])
-    obsv = np.zeros(len(participants), dtype='int32')
+    obsv = np.zeros(len(participants), dtype='int64')
     for count, p in enumerate(participants):
         obsv[count] = np.sum(data['participants'].str.count(p))
     
@@ -51,8 +51,8 @@ def observations(data): # Identify how many ovservation were obtained for each p
 def ANOVA_MS(data):
     model = ols('variables ~ participants', data = data).fit()
     anova_result = sm.stats.anova_lm(model, typ=2)
-    MS_between = anova_result['sum_sq'][0] / anova_result['df'][0]
-    MS_within = anova_result['sum_sq'][1] / anova_result['df'][1]
+    MS_between = anova_result['sum_sq']['participants'] / anova_result['df']['participants']
+    MS_within = anova_result['sum_sq']['Residual'] / anova_result['df']['Residual']
     
     return MS_between, MS_within
 
